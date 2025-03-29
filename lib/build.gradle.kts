@@ -2,6 +2,7 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
     jacoco
+    `maven-publish`
 
     id("com.consentframework.consentmanagement.checkstyle-config") version "1.1.0"
 }
@@ -31,6 +32,30 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+// Publish jar to GitHub Packages so can import into other repositories
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = uri("https://maven.pkg.github.com/Consent-Management-Platform/consent-api-java-common")
+      credentials {
+        username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
+        password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+
+  publications {
+    register<MavenPublication>("gpr") {
+      groupId = "com.consentframework"
+      artifactId = "api-java-common"
+      version = "0.0.1"
+
+      from(components["java"])
+    }
+  }
 }
 
 tasks {
