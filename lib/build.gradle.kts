@@ -1,6 +1,9 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    jacoco
+
+    id("com.consentframework.consentmanagement.checkstyle-config") version "1.1.0"
 }
 
 repositories {
@@ -8,25 +11,63 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.guava)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
+
+    // Logging
+    val log4j2Version = "2.23.1"
+    implementation("org.apache.logging.log4j:log4j-api:$log4j2Version")
+    implementation("org.apache.logging.log4j:log4j-core:$log4j2Version")
+
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api(libs.commons.math3)
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation(libs.guava)
+    // Use the following syntax to export dependencies to consumers, that is, add to their compile classpath.
+    // api(libs.commons.math3)
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
-tasks.named<Test>("test") {
-    useJUnitPlatform()
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = BigDecimal.valueOf(0.95)
+                }
+            }
+        }
+    }
+
+    build {
+        dependsOn("packageJar")
+    }
+
+    check {
+        // Fail build if under min test coverage thresholds
+        dependsOn(jacocoTestCoverageVerification)
+    }
+}
+
+// Build jar which will later be consumed to run the API service
+tasks.register<Zip>("packageJar") {
+    into("lib") {
+        from(tasks.jar)
+        from(configurations.runtimeClasspath)
+    }
+}
+
+tasks.clean {
+  delete("$rootDir/bin")
+  delete("$rootDir/build")
 }
