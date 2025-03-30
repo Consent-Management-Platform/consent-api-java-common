@@ -1,4 +1,7 @@
 # consent-api-java-common
+
+[![Build](https://github.com/Consent-Management-Platform/consent-api-java-common/actions/workflows/test.yml/badge.svg)](https://github.com/Consent-Management-Platform/consent-api-java-common/actions/workflows/test.yml)
+
 Common Java classes for API services hosted in AWS Lambda that will handle requests from AWS API Gateway.
 
 ## Usage
