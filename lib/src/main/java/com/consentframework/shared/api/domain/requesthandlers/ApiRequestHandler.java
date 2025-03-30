@@ -20,8 +20,8 @@ import java.util.Map;
  */
 public abstract class ApiRequestHandler {
     public static final String ERROR_RESPONSE_BODY = "{\"message\":\"%s\"}";
-    static final String MISSING_PATH_PARAMETERS_MESSAGE = "Missing required path parameters, expected %s";
-    static final String REQUEST_PARSE_FAILURE_MESSAGE = "Unable to parse request";
+    public static final String MISSING_PATH_PARAMETERS_MESSAGE = "Missing required path parameters, expected %s";
+    public static final String REQUEST_PARSE_FAILURE_MESSAGE = "Unable to parse request";
 
     private static final Logger logger = LogManager.getLogger(ApiRequestHandler.class);
 
