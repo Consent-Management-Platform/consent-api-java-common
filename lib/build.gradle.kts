@@ -79,12 +79,6 @@ tasks.register<Zip>("packageJar") {
     }
 }
 
-// Build jar with common test classes that should be reusable by other projects
-tasks.register<Jar>("testJar") {
-    archiveClassifier.set("test")
-    from(sourceSets["test"].output)
-}
-
 tasks.clean {
     delete("$rootDir/bin")
     delete("$rootDir/build")
@@ -107,14 +101,9 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "com.consentframework"
             artifactId = "api-java-common"
-            version = "0.0.5"
+            version = "0.0.6"
 
             from(components["java"])
-
-            // Add the test jar as an available artifact
-            artifact(tasks["testJar"]) {
-                classifier = "test"
-            }
         }
     }
 }
