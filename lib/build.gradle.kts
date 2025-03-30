@@ -21,6 +21,16 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:$log4j2Version")
     implementation("org.apache.logging.log4j:log4j-core:$log4j2Version")
 
+    // Immutables
+    val immutablesDependency = "org.immutables:value:2.10.1"
+    compileOnly(immutablesDependency)
+    annotationProcessor(immutablesDependency)
+    testCompileOnly(immutablesDependency)
+    testAnnotationProcessor(immutablesDependency)
+
+    // AWS DynamoDB
+    implementation("software.amazon.awssdk:dynamodb-enhanced:2.26.7")
+
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -97,7 +107,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "com.consentframework"
             artifactId = "api-java-common"
-            version = "0.0.4"
+            version = "0.0.5"
 
             from(components["java"])
 
