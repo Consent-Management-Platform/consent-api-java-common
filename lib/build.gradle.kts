@@ -35,30 +35,6 @@ java {
     }
 }
 
-// Publish jar to GitHub Packages so can import into other repositories
-publishing {
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = uri("https://maven.pkg.github.com/Consent-Management-Platform/consent-api-java-common")
-      credentials {
-        username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
-        password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
-      }
-    }
-  }
-
-  publications {
-    register<MavenPublication>("gpr") {
-      groupId = "com.consentframework"
-      artifactId = "api-java-common"
-      version = "0.0.2"
-
-      from(components["java"])
-    }
-  }
-}
-
 tasks {
     withType<Test> {
         useJUnitPlatform()
@@ -93,7 +69,42 @@ tasks.register<Zip>("packageJar") {
     }
 }
 
+// Build jar with common test classes that should be reusable by other projects
+tasks.register<Jar>("testJar") {
+    archiveClassifier.set("test")
+    from(sourceSets["test"].output)
+}
+
 tasks.clean {
-  delete("$rootDir/bin")
-  delete("$rootDir/build")
+    delete("$rootDir/bin")
+    delete("$rootDir/build")
+}
+
+// Publish jar to GitHub Packages so can import into other repositories
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Consent-Management-Platform/consent-api-java-common")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+    publications {
+        register<MavenPublication>("gpr") {
+            groupId = "com.consentframework"
+            artifactId = "api-java-common"
+            version = "0.0.3"
+
+            from(components["java"])
+
+            // Add the test jar as an available artifact
+            artifact(tasks["testJar"]) {
+                classifier = "test"
+            }
+        }
+    }
 }
