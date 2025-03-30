@@ -14,6 +14,7 @@ repositories {
 dependencies {
     implementation(libs.guava)
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
+    implementation("jakarta.annotation:jakarta.annotation-api:3.0.0")
 
     // Logging
     val log4j2Version = "2.23.1"
@@ -51,7 +52,7 @@ publishing {
     register<MavenPublication>("gpr") {
       groupId = "com.consentframework"
       artifactId = "api-java-common"
-      version = "0.0.1"
+      version = "0.0.2"
 
       from(components["java"])
     }

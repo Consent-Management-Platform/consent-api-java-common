@@ -8,6 +8,7 @@ import java.util.Map;
 public final class TestConstants {
     public static final String LIMIT_PARAM_NAME = "limit";
     public static final String PAGE_TOKEN_PARAM_NAME = "pageToken";
+    public static final String USER_ID_PARAM_NAME = "userId";
 
     public static final Integer TEST_PAGE_LIMIT = 2;
     public static final String TEST_PAGE_TOKEN = "1";
