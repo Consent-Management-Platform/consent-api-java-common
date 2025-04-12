@@ -9,6 +9,15 @@ plugins {
 
 repositories {
     mavenCentral()
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/Consent-Management-Platform/consent-management-api-models")
+            credentials {
+                username = project.findProperty("gpr.usr") as String? ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -30,6 +39,9 @@ dependencies {
 
     // AWS DynamoDB
     implementation("software.amazon.awssdk:dynamodb-enhanced:2.26.7")
+
+    // Consent service models
+    implementation("com.consentframework.consentmanagement:consentmanagement-api-models:0.3.0")
 
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
@@ -101,7 +113,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "com.consentframework"
             artifactId = "api-java-common"
-            version = "0.0.6"
+            version = "0.0.7"
 
             from(components["java"])
         }
