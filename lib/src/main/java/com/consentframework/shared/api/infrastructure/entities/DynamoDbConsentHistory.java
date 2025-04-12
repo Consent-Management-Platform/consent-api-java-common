@@ -1,7 +1,8 @@
 package com.consentframework.shared.api.infrastructure.entities;
 
+import com.consentframework.shared.api.domain.entities.StoredConsent;
 import com.consentframework.shared.api.infrastructure.annotations.DynamoDbImmutableStyle;
-import com.consentframework.shared.api.infrastructure.mappers.DynamoDbAttributeValueMapConverter;
+import com.consentframework.shared.api.infrastructure.mappers.DynamoDbConsentConverter;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value.Immutable;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbConvertedBy;
@@ -9,9 +10,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbImmut
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-
-import java.util.Map;
 
 /**
  * Represents a ConsentHistory DynamoDB table record.
@@ -48,10 +46,10 @@ public interface DynamoDbConsentHistory {
     String serviceUserId();
 
     @Nullable
-    @DynamoDbConvertedBy(DynamoDbAttributeValueMapConverter.class)
-    Map<String, AttributeValue> oldImage();
+    @DynamoDbConvertedBy(DynamoDbConsentConverter.class)
+    StoredConsent oldImage();
 
     @Nullable
-    @DynamoDbConvertedBy(DynamoDbAttributeValueMapConverter.class)
-    Map<String, AttributeValue> newImage();
+    @DynamoDbConvertedBy(DynamoDbConsentConverter.class)
+    StoredConsent newImage();
 }
