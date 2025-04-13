@@ -34,7 +34,7 @@ public class TestCreateResponseContent {
      * Get status.
      */
     @Nullable
-    @JsonProperty("status")
+    @JsonProperty(JSON_PROPERTY_STATUS)
     @JsonInclude(Include.USE_DEFAULTS)
     public String getStatus() {
         return this.status;
@@ -43,7 +43,7 @@ public class TestCreateResponseContent {
     /**
      * Set status.
      */
-    @JsonProperty("status")
+    @JsonProperty(JSON_PROPERTY_STATUS)
     @JsonInclude(Include.USE_DEFAULTS)
     public void setStatus(final String status) {
         this.status = status;

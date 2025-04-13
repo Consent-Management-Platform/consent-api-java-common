@@ -43,7 +43,7 @@ public class StoredConsentImage {
     private String userId;
     public static final String JSON_PROPERTY_SERVICE_ID = "serviceId";
     private String serviceId;
-    public static final String JSON_PROPERTY_STATUS = "consentStatus";
+    public static final String JSON_PROPERTY_CONSENT_STATUS = "consentStatus";
     private String consentStatus;
     public static final String JSON_PROPERTY_CONSENT_TYPE = "consentType";
     private String consentType;
@@ -72,7 +72,7 @@ public class StoredConsentImage {
      * Returns the ID.
      */
     @Nonnull
-    @JsonProperty("id")
+    @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(Include.ALWAYS)
     public String getId() {
         return this.id;
@@ -81,7 +81,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent ID.
      */
-    @JsonProperty("id")
+    @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(Include.ALWAYS)
     public void setId(final String id) {
         this.id = id;
@@ -99,7 +99,7 @@ public class StoredConsentImage {
      * Returns the consent ID.
      */
     @Nonnull
-    @JsonProperty("consentId")
+    @JsonProperty(JSON_PROPERTY_CONSENT_ID)
     @JsonInclude(Include.ALWAYS)
     public String getConsentId() {
         return this.consentId;
@@ -108,7 +108,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent ID.
      */
-    @JsonProperty("consentId")
+    @JsonProperty(JSON_PROPERTY_CONSENT_ID)
     @JsonInclude(Include.ALWAYS)
     public void setConsentId(final String consentId) {
         this.consentId = consentId;
@@ -126,7 +126,7 @@ public class StoredConsentImage {
      * Returns the consent version.
      */
     @Nonnull
-    @JsonProperty("consentVersion")
+    @JsonProperty(JSON_PROPERTY_CONSENT_VERSION)
     @JsonInclude(Include.ALWAYS)
     public Integer getConsentVersion() {
         return this.consentVersion;
@@ -135,7 +135,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent version.
      */
-    @JsonProperty("consentVersion")
+    @JsonProperty(JSON_PROPERTY_CONSENT_VERSION)
     @JsonInclude(Include.ALWAYS)
     public void setConsentVersion(final Integer consentVersion) {
         this.consentVersion = consentVersion;
@@ -153,7 +153,7 @@ public class StoredConsentImage {
      * Returns the userId.
      */
     @Nonnull
-    @JsonProperty("userId")
+    @JsonProperty(JSON_PROPERTY_USER_ID)
     @JsonInclude(Include.ALWAYS)
     public String getUserId() {
         return this.userId;
@@ -162,7 +162,7 @@ public class StoredConsentImage {
     /**
      * Sets the userId.
      */
-    @JsonProperty("userId")
+    @JsonProperty(JSON_PROPERTY_USER_ID)
     @JsonInclude(Include.ALWAYS)
     public void setUserId(final String userId) {
         this.userId = userId;
@@ -180,7 +180,7 @@ public class StoredConsentImage {
      * Returns the serviceId.
      */
     @Nonnull
-    @JsonProperty("serviceId")
+    @JsonProperty(JSON_PROPERTY_SERVICE_ID)
     @JsonInclude(Include.ALWAYS)
     public String getServiceId() {
         return this.serviceId;
@@ -189,7 +189,7 @@ public class StoredConsentImage {
     /**
      * Sets the serviceId.
      */
-    @JsonProperty("serviceId")
+    @JsonProperty(JSON_PROPERTY_SERVICE_ID)
     @JsonInclude(Include.ALWAYS)
     public void setServiceId(final String serviceId) {
         this.serviceId = serviceId;
@@ -207,7 +207,7 @@ public class StoredConsentImage {
      * Returns the consent status.
      */
     @Nonnull
-    @JsonProperty("consentStatus")
+    @JsonProperty(JSON_PROPERTY_CONSENT_STATUS)
     @JsonInclude(Include.ALWAYS)
     public String getConsentStatus() {
         return this.consentStatus;
@@ -216,7 +216,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent status.
      */
-    @JsonProperty("consentStatus")
+    @JsonProperty(JSON_PROPERTY_CONSENT_STATUS)
     @JsonInclude(Include.ALWAYS)
     public void setConsentStatus(final String consentStatus) {
         this.consentStatus = consentStatus;
@@ -234,7 +234,7 @@ public class StoredConsentImage {
      * Returns the consent type.
      */
     @Nullable
-    @JsonProperty("consentType")
+    @JsonProperty(JSON_PROPERTY_CONSENT_TYPE)
     @JsonInclude(Include.USE_DEFAULTS)
     public String getConsentType() {
         return this.consentType;
@@ -243,7 +243,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent type.
      */
-    @JsonProperty("consentType")
+    @JsonProperty(JSON_PROPERTY_CONSENT_TYPE)
     @JsonInclude(Include.USE_DEFAULTS)
     public void setConsentType(final String consentType) {
         this.consentType = consentType;
@@ -273,7 +273,7 @@ public class StoredConsentImage {
      * Returns the consent data map.
      */
     @Nullable
-    @JsonProperty("consentData")
+    @JsonProperty(JSON_PROPERTY_CONSENT_DATA)
     @JsonInclude(Include.USE_DEFAULTS)
     public Map<String, String> getConsentData() {
         return this.consentData;
@@ -282,7 +282,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent data map.
      */
-    @JsonProperty("consentData")
+    @JsonProperty(JSON_PROPERTY_CONSENT_DATA)
     @JsonInclude(Include.USE_DEFAULTS)
     public void setConsentData(final Map<String, String> consentData) {
         this.consentData = consentData == null ? null : new HashMap<>(consentData);
@@ -300,7 +300,7 @@ public class StoredConsentImage {
      * Returns the expiry time of the consent.
      */
     @Nullable
-    @JsonProperty("expiryTime")
+    @JsonProperty(JSON_PROPERTY_EXPIRY_TIME)
     @JsonInclude(Include.USE_DEFAULTS)
     public OffsetDateTime getExpiryTime() {
         return this.expiryTime;
@@ -309,7 +309,7 @@ public class StoredConsentImage {
     /**
      * Sets the expiry time of the consent.
      */
-    @JsonProperty("expiryTime")
+    @JsonProperty(JSON_PROPERTY_EXPIRY_TIME)
     @JsonInclude(Include.USE_DEFAULTS)
     public void setExpiryTime(final OffsetDateTime expiryTime) {
         this.expiryTime = expiryTime;
@@ -331,7 +331,7 @@ public class StoredConsentImage {
      * and is a sparse partition key for the ActiveConsentsWithExpiryTime GSI.
      */
     @Nullable
-    @JsonProperty("activeId")
+    @JsonProperty(JSON_PROPERTY_ACTIVE_ID)
     @JsonInclude(Include.USE_DEFAULTS)
     public String getActiveId() {
         return this.activeId;
@@ -340,7 +340,7 @@ public class StoredConsentImage {
     /**
      * Sets the active ID.
      */
-    @JsonProperty("activeId")
+    @JsonProperty(JSON_PROPERTY_ACTIVE_ID)
     @JsonInclude(Include.USE_DEFAULTS)
     public void setActiveId(final String activeId) {
         this.activeId = activeId;
