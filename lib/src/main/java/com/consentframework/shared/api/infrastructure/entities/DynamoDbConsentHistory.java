@@ -1,6 +1,5 @@
 package com.consentframework.shared.api.infrastructure.entities;
 
-import com.consentframework.shared.api.domain.entities.StoredConsent;
 import com.consentframework.shared.api.infrastructure.annotations.DynamoDbImmutableStyle;
 import com.consentframework.shared.api.infrastructure.mappers.DynamoDbConsentConverter;
 import jakarta.annotation.Nullable;
@@ -47,9 +46,9 @@ public interface DynamoDbConsentHistory {
 
     @Nullable
     @DynamoDbConvertedBy(DynamoDbConsentConverter.class)
-    StoredConsent oldImage();
+    StoredConsentImage oldImage();
 
     @Nullable
     @DynamoDbConvertedBy(DynamoDbConsentConverter.class)
-    StoredConsent newImage();
+    StoredConsentImage newImage();
 }

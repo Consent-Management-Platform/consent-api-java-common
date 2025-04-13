@@ -1,4 +1,4 @@
-package com.consentframework.shared.api.domain.entities;
+package com.consentframework.shared.api.infrastructure.entities;
 
 import com.consentframework.consentmanagement.api.models.ConsentStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
-* Represents the Consent data stored in DynamoDB.
+* Represents the data stored in DynamoDB ConsentHistory consent images.
 *
 * Differences from externalized Consent data objects:
 * - Stored consents have an "id" field that represents the partition key of "ServiceId|UserId|ConsentId",
@@ -32,7 +32,7 @@ import java.util.Objects;
     "consentData",
     "expiryTime"
 })
-public class StoredConsent {
+public class StoredConsentImage {
     public static final String JSON_PROPERTY_ID = "id";
     private String id;
     public static final String JSON_PROPERTY_CONSENT_ID = "consentId";
@@ -55,13 +55,13 @@ public class StoredConsent {
     /**
      * Default constructor required by Jackson, does not initialize any fields.
      */
-    public StoredConsent() {
+    public StoredConsentImage() {
     }
 
     /**
-     * Sets the ID and returns the updated StoredConsent.
+     * Sets the ID and returns the updated StoredConsentImage.
      */
-    public StoredConsent id(final String id) {
+    public StoredConsentImage id(final String id) {
         this.id = id;
         return this;
     }
@@ -86,9 +86,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the consent ID and returns the updated StoredConsent.
+     * Sets the consent ID and returns the updated StoredConsentImage.
      */
-    public StoredConsent consentId(final String consentId) {
+    public StoredConsentImage consentId(final String consentId) {
         this.consentId = consentId;
         return this;
     }
@@ -113,9 +113,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the consent version and returns the updated StoredConsent.
+     * Sets the consent version and returns the updated StoredConsentImage.
      */
-    public StoredConsent consentVersion(final Integer consentVersion) {
+    public StoredConsentImage consentVersion(final Integer consentVersion) {
         this.consentVersion = consentVersion;
         return this;
     }
@@ -140,9 +140,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the userId and returns the updated StoredConsent.
+     * Sets the userId and returns the updated StoredConsentImage.
      */
-    public StoredConsent userId(final String userId) {
+    public StoredConsentImage userId(final String userId) {
         this.userId = userId;
         return this;
     }
@@ -167,9 +167,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the serviceId and returns the updated StoredConsent.
+     * Sets the serviceId and returns the updated StoredConsentImage.
      */
-    public StoredConsent serviceId(final String serviceId) {
+    public StoredConsentImage serviceId(final String serviceId) {
         this.serviceId = serviceId;
         return this;
     }
@@ -194,9 +194,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the consent status and returns the updated StoredConsent.
+     * Sets the consent status and returns the updated StoredConsentImage.
      */
-    public StoredConsent consentStatus(final ConsentStatus consentStatus) {
+    public StoredConsentImage consentStatus(final ConsentStatus consentStatus) {
         this.consentStatus = consentStatus;
         return this;
     }
@@ -221,9 +221,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the consent type and returns the updated StoredConsent.
+     * Sets the consent type and returns the updated StoredConsentImage.
      */
-    public StoredConsent consentType(final String consentType) {
+    public StoredConsentImage consentType(final String consentType) {
         this.consentType = consentType;
         return this;
     }
@@ -248,17 +248,17 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the consent data map and returns the updated StoredConsent.
+     * Sets the consent data map and returns the updated StoredConsentImage.
      */
-    public StoredConsent consentData(final Map<String, String> consentData) {
+    public StoredConsentImage consentData(final Map<String, String> consentData) {
         setConsentData(consentData);
         return this;
     }
 
     /**
-     * Adds a consent data item to the consent data map and returns the updated StoredConsent.
+     * Adds a consent data item to the consent data map and returns the updated StoredConsentImage.
      */
-    public StoredConsent putConsentDataItem(final String key, final String consentDataItem) {
+    public StoredConsentImage putConsentDataItem(final String key, final String consentDataItem) {
         if (this.consentData == null) {
             this.consentData = new HashMap<>();
         }
@@ -287,9 +287,9 @@ public class StoredConsent {
     }
 
     /**
-     * Sets the expiry time of the consent and returns the updated StoredConsent.
+     * Sets the expiry time of the consent and returns the updated StoredConsentImage.
      */
-    public StoredConsent expiryTime(final OffsetDateTime expiryTime) {
+    public StoredConsentImage expiryTime(final OffsetDateTime expiryTime) {
         this.expiryTime = expiryTime;
         return this;
     }
@@ -320,7 +320,7 @@ public class StoredConsent {
         if (this == o) {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
-            final StoredConsent consent = (StoredConsent) o;
+            final StoredConsentImage consent = (StoredConsentImage) o;
             return Objects.equals(this.id, consent.id)
                 && Objects.equals(this.consentId, consent.consentId)
                 && Objects.equals(this.consentVersion, consent.consentVersion)
@@ -352,11 +352,11 @@ public class StoredConsent {
     }
 
     /**
-     * Pretty print the StoredConsent object for logging.
+     * Pretty print the StoredConsentImage object for logging.
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class StoredConsent {\n");
+        sb.append("class StoredConsentImage {\n");
         sb.append("    serviceId: ").append(this.toIndentedString(this.serviceId)).append("\n");
         sb.append("    userId: ").append(this.toIndentedString(this.userId)).append("\n");
         sb.append("    consentId: ").append(this.toIndentedString(this.consentId)).append("\n");

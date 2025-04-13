@@ -1,4 +1,4 @@
-package com.consentframework.shared.api.domain.entities;
+package com.consentframework.shared.api.infrastructure.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,132 +12,132 @@ import org.junit.jupiter.api.Test;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-class StoredConsentTest {
+class StoredConsentImageTest {
     @Test
     void equalsWhenNull() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
         assertFalse(consent.equals(null));
     }
 
     @Test
     void equalsWhenSameObject() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
         assertTrue(consent.equals(consent));
     }
 
     @Test
     void equalsWhenSameValues() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
-        final StoredConsent consentWithSameValues = cloneStoredConsent(consent);
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consentWithSameValues = cloneStoredConsent(consent);
         assertTrue(consent.equals(consentWithSameValues));
     }
 
     @Test
     void equalsWhenDifferentServiceId() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .serviceId("differentServiceId");
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentUserId() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .userId("differentUserId");
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentConsentId() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .consentId("differentConsentId");
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentId() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .id("differentId");
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentConsentVersion() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .consentVersion(5);
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentConsentStatus() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .consentStatus(ConsentStatus.EXPIRED);
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentConsentType() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .consentType("differentConsentType");
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentExpiryTime() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .expiryTime(OffsetDateTime.now());
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentData() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
 
         final Map<String, String> differentConsentData = Map.of("key", "value");
-        final StoredConsent consentWithDifferentData = cloneStoredConsent(consent)
+        final StoredConsentImage consentWithDifferentData = cloneStoredConsent(consent)
             .consentData(differentConsentData);
         assertFalse(consent.equals(consentWithDifferentData));
     }
 
     @Test
     void equalsWhenDifferentType() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
         assertFalse(consent.equals(TestConstants.TEST_CONSENT));
     }
 
     @Test
     void hashCodeIsSameForEqualValues() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
-        final StoredConsent clonedConsent = cloneStoredConsent(consent);
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage clonedConsent = cloneStoredConsent(consent);
         assertEquals(consent.hashCode(), clonedConsent.hashCode());
     }
 
     @Test
     void hashCodeIsDifferentForDifferentValues() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
-        final StoredConsent clonedConsent = cloneStoredConsent(consent)
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
+        final StoredConsentImage clonedConsent = cloneStoredConsent(consent)
             .consentData(Map.of("differentKey", "differentValue"));
         assertNotEquals(consent.hashCode(), clonedConsent.hashCode());
     }
 
     @Test
     void putConsentDataItemWhenNotExists() {
-        final StoredConsent consent = new StoredConsent()
+        final StoredConsentImage consent = new StoredConsentImage()
             .consentData(null);
 
         final String newKey = "newKey";
@@ -150,7 +150,7 @@ class StoredConsentTest {
 
     @Test
     void putConsentDataItemWhenExists() {
-        final StoredConsent consent = cloneStoredConsent(TestConstants.TEST_STORED_CONSENT);
+        final StoredConsentImage consent = cloneStoredConsent(TestConstants.TEST_STORED_CONSENT);
 
         final String newKey = "newKey";
         final String newValue = "newValue";
@@ -170,8 +170,8 @@ class StoredConsentTest {
 
     @Test
     void toStringMatchesExpectedFormat() {
-        final StoredConsent consent = TestConstants.TEST_STORED_CONSENT;
-        final String expectedString = String.format("class StoredConsent {\n"
+        final StoredConsentImage consent = TestConstants.TEST_STORED_CONSENT;
+        final String expectedString = String.format("class StoredConsentImage {\n"
             + "    serviceId: %s\n"
             + "    userId: %s\n"
             + "    consentId: %s\n"
@@ -193,8 +193,8 @@ class StoredConsentTest {
         assertEquals(expectedString, consentString);
     }
 
-    private StoredConsent cloneStoredConsent(final StoredConsent originalConsent) {
-        return new StoredConsent()
+    private StoredConsentImage cloneStoredConsent(final StoredConsentImage originalConsent) {
+        return new StoredConsentImage()
             .id(originalConsent.getId())
             .serviceId(originalConsent.getServiceId())
             .userId(originalConsent.getUserId())

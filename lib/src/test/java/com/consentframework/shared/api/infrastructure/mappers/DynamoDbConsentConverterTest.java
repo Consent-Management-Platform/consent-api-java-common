@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.consentframework.consentmanagement.api.JSON;
-import com.consentframework.shared.api.domain.entities.StoredConsent;
+import com.consentframework.shared.api.infrastructure.entities.StoredConsentImage;
 import com.consentframework.shared.api.testcommon.constants.TestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class DynamoDbConsentConverterTest {
         final String jsonString = attributeValue.s();
         assertNotNull(attributeValue);
 
-        final StoredConsent consent = new JSON().getMapper().readValue(jsonString, StoredConsent.class);
+        final StoredConsentImage consent = new JSON().getMapper().readValue(jsonString, StoredConsentImage.class);
         assertNotNull(consent);
         assertEquals(TestConstants.TEST_SERVICE_ID, consent.getServiceId());
         assertEquals(TestConstants.TEST_USER_ID, consent.getUserId());
@@ -47,13 +47,13 @@ class DynamoDbConsentConverterTest {
 
     @Test
     void transformToWhenNull() {
-        final StoredConsent consent = converter.transformTo(null);
+        final StoredConsentImage consent = converter.transformTo(null);
         assertNull(consent);
     }
 
     @Test
     void transformToWhenEmpty() {
-        final StoredConsent consent = converter.transformTo(AttributeValue.fromS(null));
+        final StoredConsentImage consent = converter.transformTo(AttributeValue.fromS(null));
         assertNull(consent);
     }
 
@@ -62,13 +62,13 @@ class DynamoDbConsentConverterTest {
         final RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             converter.transformTo(AttributeValue.fromS("{\"invalidKey\":1}"));
         });
-        assertEquals("Error converting JSON string to StoredConsent", exception.getMessage());
+        assertEquals("Error converting JSON string to StoredConsentImage", exception.getMessage());
     }
 
     @Test
     void transformToWhenValidConsent() throws Exception {
         final String consentJsonString = new JSON().getMapper().writeValueAsString(TestConstants.TEST_STORED_CONSENT);
-        final StoredConsent consent = converter.transformTo(AttributeValue.fromS(consentJsonString));
+        final StoredConsentImage consent = converter.transformTo(AttributeValue.fromS(consentJsonString));
         assertNotNull(consent);
         assertEquals(TestConstants.TEST_SERVICE_ID, consent.getServiceId());
         assertEquals(TestConstants.TEST_USER_ID, consent.getUserId());
@@ -80,9 +80,9 @@ class DynamoDbConsentConverterTest {
 
     @Test
     void type() {
-        final EnhancedType<StoredConsent> type = converter.type();
+        final EnhancedType<StoredConsentImage> type = converter.type();
         assertNotNull(type);
-        assertEquals(StoredConsent.class, type.rawClass());
+        assertEquals(StoredConsentImage.class, type.rawClass());
     }
 
     @Test

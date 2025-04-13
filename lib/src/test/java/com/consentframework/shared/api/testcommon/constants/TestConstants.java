@@ -2,7 +2,7 @@ package com.consentframework.shared.api.testcommon.constants;
 
 import com.consentframework.consentmanagement.api.models.Consent;
 import com.consentframework.consentmanagement.api.models.ConsentStatus;
-import com.consentframework.shared.api.domain.entities.StoredConsent;
+import com.consentframework.shared.api.infrastructure.entities.StoredConsentImage;
 
 import java.util.Map;
 
@@ -42,7 +42,7 @@ public final class TestConstants {
         .consentType(TEST_CONSENT_TYPE)
         .consentData(TEST_CONSENT_DATA);
 
-    public static final StoredConsent TEST_STORED_CONSENT = new StoredConsent()
+    public static final StoredConsentImage TEST_STORED_CONSENT = new StoredConsentImage()
         .id(TEST_PARTITION_KEY)
         .serviceId(TEST_SERVICE_ID)
         .userId(TEST_USER_ID)
