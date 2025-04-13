@@ -179,7 +179,7 @@ class StoredConsentImageTest {
             + "    consentType: %s\n"
             + "    consentData: %s\n"
             + "    expiryTime: %s\n"
-            + "    activeId: %s\n"
+            + "    autoExpireId: %s\n"
             + "}",
             consent.getServiceId(),
             consent.getUserId(),
@@ -189,7 +189,7 @@ class StoredConsentImageTest {
             consent.getConsentType(),
             consent.getConsentData(),
             consent.getExpiryTime(),
-            consent.getActiveId());
+            consent.getAutoExpireId());
         final String consentString = consent.toString();
         assertEquals(expectedString, consentString);
     }

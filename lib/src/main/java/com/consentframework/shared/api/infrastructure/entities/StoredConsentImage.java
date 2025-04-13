@@ -30,7 +30,7 @@ import java.util.Objects;
     "consentType",
     "consentData",
     "expiryTime",
-    "activeId"
+    "autoExpireId"
 })
 public class StoredConsentImage {
     public static final String JSON_PROPERTY_ID = "id";
@@ -51,8 +51,8 @@ public class StoredConsentImage {
     private Map<String, String> consentData = new HashMap<>();
     public static final String JSON_PROPERTY_EXPIRY_TIME = "expiryTime";
     private OffsetDateTime expiryTime;
-    public static final String JSON_PROPERTY_ACTIVE_ID = "activeId";
-    private String activeId;
+    public static final String JSON_PROPERTY_AUTO_EXPIRE_ID = "autoExpireId";
+    private String autoExpireId;
 
     /**
      * Default constructor required by Jackson, does not initialize any fields.
@@ -316,34 +316,34 @@ public class StoredConsentImage {
     }
 
     /**
-     * Sets activeId and returns the updated StoredConsentImage.
+     * Sets autoExpireId and returns the updated StoredConsentImage.
      */
-    public StoredConsentImage activeId(final String activeId) {
-        this.activeId = activeId;
+    public StoredConsentImage autoExpireId(final String autoExpireId) {
+        this.autoExpireId = autoExpireId;
         return this;
     }
 
     /**
-     * Returns the activeId value.
+     * Returns the autoExpireId value.
      *
      * This is an optional field that is set to the same value as id
      * when the consent is active and has a non-null expiry time,
      * and is a sparse partition key for the ActiveConsentsWithExpiryTime GSI.
      */
     @Nullable
-    @JsonProperty(JSON_PROPERTY_ACTIVE_ID)
+    @JsonProperty(JSON_PROPERTY_AUTO_EXPIRE_ID)
     @JsonInclude(Include.USE_DEFAULTS)
-    public String getActiveId() {
-        return this.activeId;
+    public String getAutoExpireId() {
+        return this.autoExpireId;
     }
 
     /**
-     * Sets the active ID.
+     * Sets autoExpireId.
      */
-    @JsonProperty(JSON_PROPERTY_ACTIVE_ID)
+    @JsonProperty(JSON_PROPERTY_AUTO_EXPIRE_ID)
     @JsonInclude(Include.USE_DEFAULTS)
-    public void setActiveId(final String activeId) {
-        this.activeId = activeId;
+    public void setAutoExpireId(final String autoExpireId) {
+        this.autoExpireId = autoExpireId;
     }
 
     /**
@@ -363,7 +363,7 @@ public class StoredConsentImage {
                 && Objects.equals(this.consentType, consent.consentType)
                 && Objects.equals(this.consentData, consent.consentData)
                 && Objects.equals(this.expiryTime, consent.expiryTime)
-                && Objects.equals(this.activeId, consent.activeId);
+                && Objects.equals(this.autoExpireId, consent.autoExpireId);
         }
         return false;
     }
@@ -382,7 +382,7 @@ public class StoredConsentImage {
             this.consentType,
             this.consentData,
             this.expiryTime,
-            this.activeId
+            this.autoExpireId
         });
     }
 
@@ -400,7 +400,7 @@ public class StoredConsentImage {
         sb.append("    consentType: ").append(this.toIndentedString(this.consentType)).append("\n");
         sb.append("    consentData: ").append(this.toIndentedString(this.consentData)).append("\n");
         sb.append("    expiryTime: ").append(this.toIndentedString(this.expiryTime)).append("\n");
-        sb.append("    activeId: ").append(this.toIndentedString(this.activeId)).append("\n");
+        sb.append("    autoExpireId: ").append(this.toIndentedString(this.autoExpireId)).append("\n");
         sb.append("}");
         return sb.toString();
     }

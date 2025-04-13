@@ -24,7 +24,7 @@ public interface DynamoDbServiceUserConsent {
      * The ActiveConsentsWithExpiryTime GSI supports querying for all active
      * consents with non-null expiryTime values.
      *
-     * The GSI partition key, "activeId", is an optional consent attribute
+     * The GSI partition key, "autoExpireId", is an optional consent attribute
      * set to the consent's partition key value for active consents with
      * non-null expiryTime values.
      *
@@ -35,7 +35,7 @@ public interface DynamoDbServiceUserConsent {
      * in ascending order of expiry time, to efficiently identify
      * consents that should be expired.
      *
-     * The GSI only contains activeId and expiryTime attributes, which
+     * The GSI only contains autoExpireId and expiryTime attributes, which
      * are sufficient to identify consents to expire and submit DynamoDB
      * UpdateItem requests.
      */
@@ -71,7 +71,7 @@ public interface DynamoDbServiceUserConsent {
 
     @DynamoDbSecondaryPartitionKey(indexNames = { ACTIVE_CONSENTS_WITH_EXPIRY_TIME_GSI_NAME })
     @Nullable
-    String activeId();
+    String autoExpireId();
 
     @DynamoDbSecondarySortKey(indexNames = { CONSENT_BY_SERVICE_USER_GSI_NAME })
     String serviceId();
