@@ -1,6 +1,5 @@
 package com.consentframework.shared.api.infrastructure.entities;
 
-import com.consentframework.consentmanagement.api.models.ConsentStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -44,7 +43,7 @@ public class StoredConsentImage {
     public static final String JSON_PROPERTY_SERVICE_ID = "serviceId";
     private String serviceId;
     public static final String JSON_PROPERTY_STATUS = "consentStatus";
-    private ConsentStatus consentStatus;
+    private String consentStatus;
     public static final String JSON_PROPERTY_CONSENT_TYPE = "consentType";
     private String consentType;
     public static final String JSON_PROPERTY_CONSENT_DATA = "consentData";
@@ -196,7 +195,7 @@ public class StoredConsentImage {
     /**
      * Sets the consent status and returns the updated StoredConsentImage.
      */
-    public StoredConsentImage consentStatus(final ConsentStatus consentStatus) {
+    public StoredConsentImage consentStatus(final String consentStatus) {
         this.consentStatus = consentStatus;
         return this;
     }
@@ -207,7 +206,7 @@ public class StoredConsentImage {
     @Nonnull
     @JsonProperty("consentStatus")
     @JsonInclude(Include.ALWAYS)
-    public ConsentStatus getConsentStatus() {
+    public String getConsentStatus() {
         return this.consentStatus;
     }
 
@@ -216,7 +215,7 @@ public class StoredConsentImage {
      */
     @JsonProperty("consentStatus")
     @JsonInclude(Include.ALWAYS)
-    public void setConsentStatus(final ConsentStatus consentStatus) {
+    public void setConsentStatus(final String consentStatus) {
         this.consentStatus = consentStatus;
     }
 

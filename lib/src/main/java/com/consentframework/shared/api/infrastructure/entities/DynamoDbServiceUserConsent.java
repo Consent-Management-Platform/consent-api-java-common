@@ -1,6 +1,5 @@
 package com.consentframework.shared.api.infrastructure.entities;
 
-import com.consentframework.consentmanagement.api.models.ConsentStatus;
 import com.consentframework.shared.api.infrastructure.annotations.DynamoDbImmutableStyle;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value.Immutable;
@@ -84,7 +83,7 @@ public interface DynamoDbServiceUserConsent {
 
     Integer consentVersion();
 
-    ConsentStatus consentStatus();
+    String consentStatus();
 
     @Nullable
     String consentType();
