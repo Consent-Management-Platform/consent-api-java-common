@@ -29,7 +29,8 @@ import java.util.Objects;
     "consentStatus",
     "consentType",
     "consentData",
-    "expiryTime"
+    "expiryTime",
+    "activeId"
 })
 public class StoredConsentImage {
     public static final String JSON_PROPERTY_ID = "id";
@@ -50,6 +51,8 @@ public class StoredConsentImage {
     private Map<String, String> consentData = new HashMap<>();
     public static final String JSON_PROPERTY_EXPIRY_TIME = "expiryTime";
     private OffsetDateTime expiryTime;
+    public static final String JSON_PROPERTY_ACTIVE_ID = "activeId";
+    private String activeId;
 
     /**
      * Default constructor required by Jackson, does not initialize any fields.
@@ -313,6 +316,37 @@ public class StoredConsentImage {
     }
 
     /**
+     * Sets activeId and returns the updated StoredConsentImage.
+     */
+    public StoredConsentImage activeId(final String activeId) {
+        this.activeId = activeId;
+        return this;
+    }
+
+    /**
+     * Returns the activeId value.
+     *
+     * This is an optional field that is set to the same value as id
+     * when the consent is active and has a non-null expiry time,
+     * and is a sparse partition key for the ActiveConsentsWithExpiryTime GSI.
+     */
+    @Nullable
+    @JsonProperty("activeId")
+    @JsonInclude(Include.USE_DEFAULTS)
+    public String getActiveId() {
+        return this.activeId;
+    }
+
+    /**
+     * Sets the active ID.
+     */
+    @JsonProperty("activeId")
+    @JsonInclude(Include.USE_DEFAULTS)
+    public void setActiveId(final String activeId) {
+        this.activeId = activeId;
+    }
+
+    /**
      * Indicates whether another object is equal to this object.
      */
     public boolean equals(final Object o) {
@@ -328,7 +362,8 @@ public class StoredConsentImage {
                 && Objects.equals(this.consentStatus, consent.consentStatus)
                 && Objects.equals(this.consentType, consent.consentType)
                 && Objects.equals(this.consentData, consent.consentData)
-                && Objects.equals(this.expiryTime, consent.expiryTime);
+                && Objects.equals(this.expiryTime, consent.expiryTime)
+                && Objects.equals(this.activeId, consent.activeId);
         }
         return false;
     }
@@ -346,7 +381,8 @@ public class StoredConsentImage {
             this.consentStatus,
             this.consentType,
             this.consentData,
-            this.expiryTime
+            this.expiryTime,
+            this.activeId
         });
     }
 
@@ -364,6 +400,7 @@ public class StoredConsentImage {
         sb.append("    consentType: ").append(this.toIndentedString(this.consentType)).append("\n");
         sb.append("    consentData: ").append(this.toIndentedString(this.consentData)).append("\n");
         sb.append("    expiryTime: ").append(this.toIndentedString(this.expiryTime)).append("\n");
+        sb.append("    activeId: ").append(this.toIndentedString(this.activeId)).append("\n");
         sb.append("}");
         return sb.toString();
     }
