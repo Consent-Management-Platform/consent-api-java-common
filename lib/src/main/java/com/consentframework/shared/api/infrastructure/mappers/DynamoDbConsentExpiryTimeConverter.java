@@ -9,8 +9,8 @@ import java.time.temporal.ChronoUnit;
  * Utility functions for converting expiryTime attribute values.
  */
 public final class DynamoDbConsentExpiryTimeConverter {
-    private static final DateTimeFormatter EXPIRY_HOUR_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00'Z'");
-    private static final DateTimeFormatter EXPIRY_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    public static final DateTimeFormatter EXPIRY_HOUR_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00'Z'");
+    public static final DateTimeFormatter EXPIRY_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     private DynamoDbConsentExpiryTimeConverter() {}
 
