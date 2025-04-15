@@ -113,7 +113,7 @@ publishing {
         register<MavenPublication>("gpr") {
             groupId = "com.consentframework"
             artifactId = "api-java-common"
-            version = "0.0.13"
+            version = "0.0.14"
 
             from(components["java"])
         }
