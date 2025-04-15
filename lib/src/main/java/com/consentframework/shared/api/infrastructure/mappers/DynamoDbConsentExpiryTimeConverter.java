@@ -34,8 +34,30 @@ public final class DynamoDbConsentExpiryTimeConverter {
      * @return The expiryTimeId string.
      */
     public static String toExpiryTimeId(final OffsetDateTime expiryTime, final String id) {
-        final String expiryTimePrefix = expiryTime.withOffsetSameInstant(ZoneOffset.UTC)
+        return String.format("%s|%s", toExpiryTimeString(expiryTime), id);
+    }
+
+    /**
+     * Converts an expiryTime to a string in the format "yyyy-MM-dd'T'HH:mm:ss'Z'".
+     *
+     * Eg. "2010-12-03T11:50:12Z"
+     *
+     * @param expiryTime The consent expiryTime as an OffsetDateTime.
+     * @return The expiryTime as an ISO 8601 string with UTC timezone and second precision.
+     */
+    public static String toExpiryTimeString(final OffsetDateTime expiryTime) {
+        return expiryTime.withOffsetSameInstant(ZoneOffset.UTC)
             .format(EXPIRY_TIME_FORMATTER);
-        return String.format("%s|%s", expiryTimePrefix, id);
+    }
+
+    /**
+     * Converts an expiryTime string to an OffsetDateTime with UTC timezone and second precision.
+     *
+     * @param expiryTime The expiryTime string.
+     * @return The expiryTime as an OffsetDateTime.
+     */
+    public static OffsetDateTime toExpiryTimeOffsetDateTime(final String expiryTime) {
+        return OffsetDateTime.parse(expiryTime).withOffsetSameInstant(ZoneOffset.UTC)
+            .truncatedTo(ChronoUnit.SECONDS);
     }
 }

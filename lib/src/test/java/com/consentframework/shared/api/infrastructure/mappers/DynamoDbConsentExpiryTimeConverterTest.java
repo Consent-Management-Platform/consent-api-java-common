@@ -37,4 +37,30 @@ class DynamoDbConsentExpiryTimeConverterTest {
             TEST_EXPIRY_TIME_PST, TestConstants.TEST_PARTITION_KEY);
         assertEquals("2011-11-01T04:51:12Z|" + TestConstants.TEST_PARTITION_KEY, expiryTimeId);
     }
+
+    @Test
+    void toExpiryTimeString_withUtcTimeInput() {
+        final String expiryTimeString = DynamoDbConsentExpiryTimeConverter.toExpiryTimeString(TEST_EXPIRY_TIME_UTC);
+        assertEquals("2011-10-31T20:51:12Z", expiryTimeString);
+    }
+
+    @Test
+    void toExpiryTimeString_withPacificTimeInput() {
+        final String expiryTimeString = DynamoDbConsentExpiryTimeConverter.toExpiryTimeString(TEST_EXPIRY_TIME_PST);
+        assertEquals("2011-11-01T04:51:12Z", expiryTimeString);
+    }
+
+    @Test
+    void toExpiryTimeOffsetDateTime_withOffsetTimeZoneAndSecondPrecision() {
+        final String expiryTimeString = "2011-10-31T20:51:12+01:00";
+        final OffsetDateTime expiryTime = DynamoDbConsentExpiryTimeConverter.toExpiryTimeOffsetDateTime(expiryTimeString);
+        assertEquals(OffsetDateTime.of(2011, 10, 31, 19, 51, 12, 0, ZoneOffset.UTC), expiryTime);
+    }
+
+    @Test
+    void toExpiryTimeOffsetDateTime_withUtcTimeZoneAndMillisecondPrecision() {
+        final String expiryTimeString = "2011-10-31T20:51:12.123Z";
+        final OffsetDateTime expiryTime = DynamoDbConsentExpiryTimeConverter.toExpiryTimeOffsetDateTime(expiryTimeString);
+        assertEquals(OffsetDateTime.of(2011, 10, 31, 20, 51, 12, 0, ZoneOffset.UTC), expiryTime);
+    }
 }
