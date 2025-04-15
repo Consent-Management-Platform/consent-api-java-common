@@ -178,8 +178,9 @@ class StoredConsentImageTest {
             + "    consentStatus: %s\n"
             + "    consentType: %s\n"
             + "    consentData: %s\n"
+            + "    expiryHour: %s\n"
             + "    expiryTime: %s\n"
-            + "    autoExpireId: %s\n"
+            + "    expiryTimeId: %s\n"
             + "}",
             consent.getServiceId(),
             consent.getUserId(),
@@ -188,8 +189,9 @@ class StoredConsentImageTest {
             consent.getConsentStatus(),
             consent.getConsentType(),
             consent.getConsentData(),
+            consent.getExpiryHour(),
             consent.getExpiryTime(),
-            consent.getAutoExpireId());
+            consent.getExpiryTimeId());
         final String consentString = consent.toString();
         assertEquals(expectedString, consentString);
     }
@@ -203,6 +205,9 @@ class StoredConsentImageTest {
             .consentVersion(originalConsent.getConsentVersion())
             .consentStatus(originalConsent.getConsentStatus())
             .consentType(originalConsent.getConsentType())
-            .consentData(originalConsent.getConsentData());
+            .consentData(originalConsent.getConsentData())
+            .expiryHour(originalConsent.getExpiryHour())
+            .expiryTime(originalConsent.getExpiryTime())
+            .expiryTimeId(originalConsent.getExpiryTimeId());
     }
 }

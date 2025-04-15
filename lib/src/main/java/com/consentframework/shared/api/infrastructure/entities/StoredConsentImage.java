@@ -29,8 +29,9 @@ import java.util.Objects;
     "consentStatus",
     "consentType",
     "consentData",
+    "expiryHour",
     "expiryTime",
-    "autoExpireId"
+    "expiryTimeId"
 })
 public class StoredConsentImage {
     public static final String JSON_PROPERTY_ID = "id";
@@ -49,10 +50,12 @@ public class StoredConsentImage {
     private String consentType;
     public static final String JSON_PROPERTY_CONSENT_DATA = "consentData";
     private Map<String, String> consentData = new HashMap<>();
+    public static final String JSON_PROPERTY_EXPIRY_HOUR = "expiryHour";
+    private String expiryHour;
     public static final String JSON_PROPERTY_EXPIRY_TIME = "expiryTime";
     private OffsetDateTime expiryTime;
-    public static final String JSON_PROPERTY_AUTO_EXPIRE_ID = "autoExpireId";
-    private String autoExpireId;
+    public static final String JSON_PROPERTY_EXPIRY_TIME_ID = "expiryTimeId";
+    private String expiryTimeId;
 
     /**
      * Default constructor required by Jackson, does not initialize any fields.
@@ -289,6 +292,33 @@ public class StoredConsentImage {
     }
 
     /**
+     * Sets the expiry hour of the consent and returns the updated StoredConsentImage.
+     */
+    public StoredConsentImage expiryHour(final String expiryHour) {
+        this.expiryHour = expiryHour;
+        return this;
+    }
+
+    /**
+     * Returns the expiry hour of the consent in UTC, eg. "2010-12-03T11:00".
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_EXPIRY_HOUR)
+    @JsonInclude(Include.USE_DEFAULTS)
+    public String getExpiryHour() {
+        return this.expiryHour;
+    }
+
+    /**
+     * Sets the expiry time of the consent.
+     */
+    @JsonProperty(JSON_PROPERTY_EXPIRY_HOUR)
+    @JsonInclude(Include.USE_DEFAULTS)
+    public void setExpiryHour(final String expiryHour) {
+        this.expiryHour = expiryHour;
+    }
+
+    /**
      * Sets the expiry time of the consent and returns the updated StoredConsentImage.
      */
     public StoredConsentImage expiryTime(final OffsetDateTime expiryTime) {
@@ -316,34 +346,30 @@ public class StoredConsentImage {
     }
 
     /**
-     * Sets autoExpireId and returns the updated StoredConsentImage.
+     * Sets the expiryTimeId which combines expiryTime and id, and returns the updated StoredConsentImage.
      */
-    public StoredConsentImage autoExpireId(final String autoExpireId) {
-        this.autoExpireId = autoExpireId;
+    public StoredConsentImage expiryTimeId(final String expiryTimeId) {
+        this.expiryTimeId = expiryTimeId;
         return this;
     }
 
     /**
-     * Returns the autoExpireId value.
-     *
-     * This is an optional field that is set to the same value as id
-     * when the consent is active and has a non-null expiry time,
-     * and is a sparse partition key for the ActiveConsentsWithExpiryTime GSI.
+     * Returns the expiryTimeId of the consent.
      */
     @Nullable
-    @JsonProperty(JSON_PROPERTY_AUTO_EXPIRE_ID)
+    @JsonProperty(JSON_PROPERTY_EXPIRY_TIME_ID)
     @JsonInclude(Include.USE_DEFAULTS)
-    public String getAutoExpireId() {
-        return this.autoExpireId;
+    public String getExpiryTimeId() {
+        return this.expiryTimeId;
     }
 
     /**
-     * Sets autoExpireId.
+     * Sets the expiryTimeId of the consent.
      */
-    @JsonProperty(JSON_PROPERTY_AUTO_EXPIRE_ID)
+    @JsonProperty(JSON_PROPERTY_EXPIRY_TIME_ID)
     @JsonInclude(Include.USE_DEFAULTS)
-    public void setAutoExpireId(final String autoExpireId) {
-        this.autoExpireId = autoExpireId;
+    public void setExpiryTimeId(final String expiryTimeId) {
+        this.expiryTimeId = expiryTimeId;
     }
 
     /**
@@ -362,8 +388,9 @@ public class StoredConsentImage {
                 && Objects.equals(this.consentStatus, consent.consentStatus)
                 && Objects.equals(this.consentType, consent.consentType)
                 && Objects.equals(this.consentData, consent.consentData)
+                && Objects.equals(this.expiryHour, consent.expiryHour)
                 && Objects.equals(this.expiryTime, consent.expiryTime)
-                && Objects.equals(this.autoExpireId, consent.autoExpireId);
+                && Objects.equals(this.expiryTimeId, consent.expiryTimeId);
         }
         return false;
     }
@@ -381,8 +408,9 @@ public class StoredConsentImage {
             this.consentStatus,
             this.consentType,
             this.consentData,
+            this.expiryHour,
             this.expiryTime,
-            this.autoExpireId
+            this.expiryTimeId
         });
     }
 
@@ -399,8 +427,9 @@ public class StoredConsentImage {
         sb.append("    consentStatus: ").append(this.toIndentedString(this.consentStatus)).append("\n");
         sb.append("    consentType: ").append(this.toIndentedString(this.consentType)).append("\n");
         sb.append("    consentData: ").append(this.toIndentedString(this.consentData)).append("\n");
+        sb.append("    expiryHour: ").append(this.toIndentedString(this.expiryHour)).append("\n");
         sb.append("    expiryTime: ").append(this.toIndentedString(this.expiryTime)).append("\n");
-        sb.append("    autoExpireId: ").append(this.toIndentedString(this.autoExpireId)).append("\n");
+        sb.append("    expiryTimeId: ").append(this.toIndentedString(this.expiryTimeId)).append("\n");
         sb.append("}");
         return sb.toString();
     }

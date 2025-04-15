@@ -21,25 +21,19 @@ public interface DynamoDbServiceUserConsent {
     public static final String PARTITION_KEY = "id";
 
     /**
-     * The ActiveConsentsWithExpiryTime GSI supports querying for all active
+     * The ActiveConsentsByExpiryHour GSI supports querying for all active
      * consents with non-null expiryTime values.
      *
-     * The GSI partition key, "autoExpireId", is an optional consent attribute
-     * set to the consent's partition key value for active consents with
-     * non-null expiryTime values.
+     * The GSI partition key, "expiryHour", is an optional consent attribute
+     * set to the consent expiry hour for active consents with expiry times.
      *
-     * This makes the GSI a sparse index that only contains consents relevant
-     * for the auto expiration workflow.
-     *
-     * The GSI sort key, "expiryTime", is used to scan in-scope consents
-     * in ascending order of expiry time, to efficiently identify
-     * consents that should be expired.
-     *
-     * The GSI only contains autoExpireId and expiryTime attributes, which
-     * are sufficient to identify consents to expire and submit DynamoDB
-     * UpdateItem requests.
+     * The GSI sort key, "expiryTimeId", is an optional consent attribute set
+     * to the consent expiry time + "|" + the consent partition key for active
+     * consents with expiry times.  This ensures that all GSI Query responses
+     * are automatically sorted in ascending order of expiry time, while
+     * maintaining uniqueness of GSI keys.
      */
-    public static final String ACTIVE_CONSENTS_WITH_EXPIRY_TIME_GSI_NAME = "ActiveConsentsWithExpiryTime";
+    public static final String ACTIVE_CONSENTS_BY_EXPIRY_HOUR_GSI_NAME = "ActiveConsentsByExpiryHour";
 
     /**
      * The ConsentsByServiceUser GSI, which supports querying for all
@@ -69,9 +63,13 @@ public interface DynamoDbServiceUserConsent {
     @DynamoDbPartitionKey
     String id();
 
-    @DynamoDbSecondaryPartitionKey(indexNames = { ACTIVE_CONSENTS_WITH_EXPIRY_TIME_GSI_NAME })
+    @DynamoDbSecondaryPartitionKey(indexNames = { ACTIVE_CONSENTS_BY_EXPIRY_HOUR_GSI_NAME })
     @Nullable
-    String autoExpireId();
+    String expiryHour();
+
+    @DynamoDbSecondarySortKey(indexNames = { ACTIVE_CONSENTS_BY_EXPIRY_HOUR_GSI_NAME })
+    @Nullable
+    String expiryTimeId();
 
     @DynamoDbSecondarySortKey(indexNames = { CONSENT_BY_SERVICE_USER_GSI_NAME })
     String serviceId();
@@ -91,7 +89,6 @@ public interface DynamoDbServiceUserConsent {
     @Nullable
     Map<String, String> consentData();
 
-    @DynamoDbSecondarySortKey(indexNames = { ACTIVE_CONSENTS_WITH_EXPIRY_TIME_GSI_NAME })
     @Nullable
     String expiryTime();
 }

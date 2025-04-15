@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     // Common Consent Framework API Java libraries
-    implementation("com.consentframework:api-java-common:0.0.12")
+    implementation("com.consentframework:api-java-common:0.0.13")
 }
 ```
 
