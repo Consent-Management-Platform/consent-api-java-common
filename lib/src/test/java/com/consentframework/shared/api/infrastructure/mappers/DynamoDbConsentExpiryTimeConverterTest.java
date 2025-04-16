@@ -63,4 +63,11 @@ class DynamoDbConsentExpiryTimeConverterTest {
         final OffsetDateTime expiryTime = DynamoDbConsentExpiryTimeConverter.toExpiryTimeOffsetDateTime(expiryTimeString);
         assertEquals(OffsetDateTime.of(2011, 10, 31, 20, 51, 12, 0, ZoneOffset.UTC), expiryTime);
     }
+
+    @Test
+    void toOffsetDateTimeFromExpiryTimeId() {
+        final String expiryTimeId = "2011-10-31T20:51:12Z|" + TestConstants.TEST_PARTITION_KEY;
+        final OffsetDateTime expiryTime = DynamoDbConsentExpiryTimeConverter.toOffsetDateTimeFromExpiryTimeId(expiryTimeId);
+        assertEquals(OffsetDateTime.of(2011, 10, 31, 20, 51, 12, 0, ZoneOffset.UTC), expiryTime);
+    }
 }
